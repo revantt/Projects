@@ -29,7 +29,7 @@ xts=np.array(df1)
 preds=np.array(clf.predict(xts))
 df2['target']=pd.Series(preds)
 df2=DataFrame(data=df2,columns=['connection_id','target'])
-df2.to_csv('predicts.csv',index=False)
+df2.to_csv('predicts.csv',index=False) 
 
 
 
