@@ -8,20 +8,19 @@ import numpy as np
 from sklearn import cross_validation
 import pandas as pd
 from pandas import Series,DataFrame
-from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import AdaBoostClassifier   #Importing the classifier here we are using AdaBoost
 
-df=pd.read_csv('train_data.csv')
-df.drop(['connection_id'],1,inplace=True)
+df=pd.read_csv('train_data.csv')  #Reading the training data
+df.drop(['connection_id'],1,inplace=True)    #Removing less important column
 
 
-x=np.array(df.drop(['target'],1))
-y=np.array(df['target'])
+x=np.array(df.drop(['target'],1))   # Our features   
+y=np.array(df['target'])   #Our Labels
 
-xtr,xt,ytr,yt=cross_validation.train_test_split(x,y,test_size=0.2)
+xtr,xt,ytr,yt=cross_validation.train_test_split(x,y,test_size=0.2)   #splitting data into training and testing set
 clf=AdaBoostClassifier(n_estimators=42)
-clf.fit(xtr,ytr)
-#score=cross_val_score(clf,x,y)
-confidence=clf.score(xt,yt)
+clf.fit(xtr,ytr)  # This is where the actual learning happens
+confidence=clf.score(xt,yt)  
 print(confidence)
 df1=pd.read_csv('test_data.csv')
 df2=df1
