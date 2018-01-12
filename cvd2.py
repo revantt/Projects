@@ -1,3 +1,12 @@
+"""Remember To uncomment line 116 and 117 for the first time because your model will train and store the trained model 
+    and when your model is trained comment or delete out 116 and 117 """
+#--------Dependencies--------
+#TensorFlow
+#Tflearn
+#OpenCV
+#tqdm(optional)
+#numpy
+
 import os
 import numpy as np
 import tensorflow as tf
@@ -10,25 +19,25 @@ from tflearn.layers.estimator import regression
 import tqdm
 
 
-traindr='E:\\tutorial\\Machine Learning\\cats vs dogs\\train'
-testdr='E:\\tutorial\\Machine Learning\\cats vs dogs\\test'
+traindr='E:\\tutorial\\Machine Learning\\cats vs dogs\\train' #Change the directory to wherever you download the data
+testdr='E:\\tutorial\\Machine Learning\\cats vs dogs\\test'  #Ditto
 
-imsize=50
-lr=1e-3
+imsize=50 #Size of the image
+lr=1e-3  #Learning Rate 
 
-model_name='catsvsdogs-{}-{}.model'.format(lr,'Xconvb')
+model_name='catsvsdogs-{}-{}.model'.format(lr,'Xconvb') #your model name 
 
-def label_img(img):
+def label_img(img):  #Preprocessing to get the labels out of the name of the image 
 	wrd=img.split('.')[0]
 	if wrd=='cat':	return [0,1]
 	elif wrd=='dog':	return [1,0]
 	
-def create_train():
+def create_train():  #Creating the training data
 	traindata=[]
-	for img in os.listdir(traindr):
+	for img in os.listdir(traindr):  #Iterating through our training data .note that the name of the image will be iterated and not the image
 		label=label_img(img)
 		path=os.path.join(traindr,img)
-		img=cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE),(imsize,imsize))
+		img=cv2.resize(cv2.imread(path,cv2.IMREAD_GRAYSCALE),(imsize,imsize)) #Resizing the image
 		traindata.append([np.array(img),label])
 	shuffle(traindata)
 	return traindata
@@ -97,7 +106,7 @@ model = tflearn.DNN(convnet)
 
 if os.path.exists('{}.meta'.format(model_name)):
 	model.load(model_name)
-	print("yya")
+	
 
 traind=traindata[:-500]
 testd=traindata[-500:]
