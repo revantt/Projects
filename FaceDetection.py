@@ -1,6 +1,10 @@
+"""IT IS REALLY IMPORTANT TO HAVE OPENCV PACKAGE INSTALLED  IN YOUR PYTHON DIRECTORY TO RUN THIS
+    JUST PUT THE IMAGE IN THE SAME FOLDER AS THIS FILE OR GIVE THE PATH IN LINE NUMBER 15"""
+
+
 import numpy as np
 import cv2
-from time import sleep
+
 
 # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
 
@@ -8,7 +12,7 @@ from time import sleep
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 
-img=cv2.imread('cc.png')
+img=cv2.imread('cc.png') #GIVE THE PATH OF YOUR PICTURE HERE
 
 while 1:
     
